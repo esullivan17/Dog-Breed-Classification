@@ -1,2 +1,2 @@
 # Dog-Breed-Classification
-Utilized principle component analysis to match 4 unknown dog breeds
+For this project, a dataset consisting of 15 unknown variables were provided. These variables held numerical values, giving the impression of no relation to one another. Through the use of a correlation matrix and principle component analysis, this high dimensional data was able to be reduced into something that can be plotted and easily distinguishable. From here, the data could be classified into the 4 dog breeds.
