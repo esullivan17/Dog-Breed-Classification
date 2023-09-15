@@ -1,0 +1,66 @@
+library(ggplot2)
+library(corrplot)
+library(data.table)
+data <- read.csv(file = 'data.csv', header = TRUE)
+colSums(is.na(data))
+data_id <- data$id
+data$id <- NULL
+
+data_normalized <- scale(data)
+
+corr_matrix <- cor(data_normalized)
+corrplot(corr_matrix, method="square")
+
+data.pca <- princomp(corr_matrix)
+summary(data.pca)
+
+
+data.pca$loadings[, 1:4]
+
+
+
+fviz_cos2(data.pca, choice = "var", axes = 1:4)
+
+
+
+library("devtools")
+install_github("kassambara/factoextra")
+library("factoextra")
+
+fviz_pca_var(data.pca, col.var = "cos2",
+             gradient.cols = c("black", "orange", "green"),
+             repel = TRUE)
+
+
+
+data$id <- data_id
+data$breed_1 <- 0.48
+data$breed_2 <- 0.43
+data$breed_3 <- 0.07
+data$breed_4 <- 0.02
+submit <- data
+
+
+submit$locus_1  <- NULL
+submit$locus_2  <- NULL
+submit$locus_3  <- NULL
+submit$locus_4  <- NULL
+submit$locus_5  <- NULL
+submit$locus_6  <- NULL
+submit$locus_7  <- NULL
+submit$locus_8  <- NULL
+submit$locus_9  <- NULL
+submit$locus_10 <- NULL
+submit$locus_11 <- NULL
+submit$locus_12 <- NULL
+submit$locus_13 <- NULL
+submit$locus_14 <- NULL
+submit$locus_15 <- NULL
+submit$dogbreed_1 <- NULL
+
+submit$breed_1 <- 0.33
+submit$breed_2 <- 0.33
+submit$breed_3 <- 0.15
+submit$breed_4 <- 0.19
+
+fwrite(submit,"./submit_dog.csv")
